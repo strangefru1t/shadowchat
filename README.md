@@ -51,11 +51,14 @@ Check that both statuses are green. You will see `Connection to rpc wallet faile
 
 #### /etc/nginx/sites-enabled/default
     server {
+        listen 443 ssl;
     
-        server_name example.com;
+        server_name pay.example.com;
         
+        # Required for websockets
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "Upgrade";
+        
         add_header X-Frame-Options DENY;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP  $remote_addr;
