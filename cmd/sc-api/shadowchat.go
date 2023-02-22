@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/gin-gonic/gin"
 	"github.com/strangefru1t/shadowchat/internal/api"
 	"github.com/strangefru1t/shadowchat/internal/config"
@@ -53,6 +55,7 @@ func main() {
 	wr.GET("/goal", api.DonationGoalWidget)
 	wr.POST("/goal", api.DonationGoalWidget)
 	r.GET("/check", api.VerifyID(api.Check))
+	log.Println("Listening on http port :8000")
 	r.Run(":8000")
 
 	//moneroRPC.CacheMempool()
