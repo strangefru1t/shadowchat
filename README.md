@@ -13,7 +13,7 @@ All commands were tested as root on a fresh debian instance
 1. `su - postgres -c 'createuser -P shadowchat && createdb -l C -E UTF8 -T template0 -O shadowchat shadowchat_db'`
 
 ### Upload your view only wallet
-Copy your viewonly and viewonly.keys files to the /srv/shadowchat/ directory.
+Copy your `viewonly` and `viewonly.keys` files to the `/srv/shadowchat` directory.
 1. `scp "C:\Users\user\Documents\Monero\wallets\user\walletname_viewonly*" root@server_ip:/srv/shadowchat`
 
 ### Set up directory and configs
@@ -33,7 +33,7 @@ Copy your viewonly and viewonly.keys files to the /srv/shadowchat/ directory.
 1. `systemctl enable --now shadowchat xmr-rpc`
 1. `systemctl status shadowchat xmr-rpc`
 
-Check that both statuses are green. You will see "Connection to rpc wallet failed" until the monero wallet has fully synced.
+Check that both statuses are green. You will see `Connection to rpc wallet failed` until the monero wallet has fully synced.
 
 #### /etc/nginx/sites-enabled/default
     server {
