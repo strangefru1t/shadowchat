@@ -1,0 +1,17 @@
+{
+    "RPCURL": "http://127.0.0.1:18082/json_rpc",
+    "DBName": "shadowchat_db",
+    "DBHost": "127.0.0.1:5432",
+    "DBUser": "shadowchat",
+    "DBPass": "",
+    "MempoolCacheIntervalMiliseconds": 3000,
+    "MoneroGetPriceIntervalSeconds": 480,
+    "DeleteUnpaidChatsAfterMinutes": 20,
+    "MinimumDonationXMR": 0.0015,
+    "MaximumMessageChars": 120,
+    "StreamlabsAccessToken": "",
+    "StreamlabsCustomImage": "https://www.getmonero.org/press-kit/symbols/monero-symbol-on-white-480.png",
+    "StreamlabsCustomSound": "https://powerchat.live/static/audio/coin.mp3",
+    "StreamlabsAlertInUSD": false,
+	"CookieSigningKey": "YOUMUSTCHANGETHISTOSOMETHINGRANDOM"
+}

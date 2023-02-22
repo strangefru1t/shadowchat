@@ -1,0 +1,18 @@
+[Unit]
+Description=Shadowchat Non-custodial Paid Chat System
+After=network.target
+
+[Service]
+Type=idle
+User=shadowchat
+Group=shadowchat
+ExecStart=/usr/bin/shadowchat
+WorkingDirectory=/srv/shadowchat
+Restart=always
+RestartSec=5
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

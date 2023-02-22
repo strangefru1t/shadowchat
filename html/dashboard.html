@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<style>
+
+</style>
+
+<body style="max-width:500px ;margin:0 auto">
+    <h2 style="text-align: center">DASHBOARD</h2>
+    <button class="tab" onmousedown="openCity(event,'Chats')">Chats</button>
+    <button class="tab" onmousedown="openCity(event,'Overlays')">Overlays</button>
+    <button class="tab" onmousedown="openCity(event,'Settings')">Settings</button>
+  
+  <div id="Chats" class="panel">
+    <script>
+        var dateformat = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+        fetch('/api/chatlog')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        function appendData(data) {
+            data.sort((a,b) => a.timestamp > b.timestamp ? -1 : 1)
+            var mainContainer = document.getElementById("Chats");
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("blockquote");
+                div.classList.add('card');
+                var time = new Date(data[i].timestamp).toLocaleTimeString("en-US",dateformat);
+                div.innerHTML = `<h3><span style="color:${id2color(data[i].id)}">${data[i].name}</span> <span class=grey>sent</span> ${data[i].amount} <span class=grey>(${time})</span></h3><p>${data[i].message}</p>`;
+                mainContainer.appendChild(div);
+            }
+        }
+        function id2color(stringInput) {
+            let stringUniqueHash = [...stringInput].reduce((acc, char) => {
+                return char.charCodeAt(0) + ((acc << 5) - acc);
+            }, 0);
+            return `hsl(${stringUniqueHash % 360}, 100%, 60%)`;
+        }
+    </script>
+  </div>
+  <div id="Control Panel" class="panel" style="display:none">
+    <h2>Control Panel</h2>
+  </div>
+
+  <div id="Settings" class="panel" style="display:none">
+<form onsubmit="return post()">
+  <label for="mindono">Minimum Donation (XMR):</label>
+  <input type="number" id="mindono" name="mindono" step="0.001">
+  <label for="maxchars">Max Donation Characters:</label>
+  <input type="number" id="maxchars" name="maxchars">
+  <label for="donogoal">Donation Goal (XMR):</label>
+  <input type="number" id="donogoal" name="donogoal" step="0.001">
+  <label for="donogoalhisthours">Donation Goal History (hours):</label>
+  <input type="number" id="donogoalhisthours" name="donogoalhisthours">
+  <label for="sltoken">Streamlabs Token:</label>
+  <input type="text" id="streamlabstoken" name="streamlabstoken">
+  <label for="setpw">Set Password:</label>
+  <input type="text" id="setpw" name="setpw">
+  <label for="alertinusd">Streamlabs Alert in USD:</label>
+  <input type="checkbox" id="alertinusd" value=false name="alertinusd">
+<input type="submit" id="save" value="Save" /></form>
+</form> 
+    <script>
+        fetch('/api/settings')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+				document.getElementById("mindono").value = data.mindono;	
+				document.getElementById("maxchars").value = data.maxchars;	
+				document.getElementById("streamlabstoken").value = data.streamlabstoken;	
+				document.getElementById("alertinusd").checked = data.alertinusd;	
+				document.getElementById("donogoal").value = data.donogoal;	
+				document.getElementById("donogoalhisthours").value = data.donogoalhisthours;	
+                console.log(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+function post() {
+    var data = new FormData();
+    var checkedTrue = document.getElementById("alertinusd").checked === true;
+    var formJson = JSON.stringify({
+        "maxchars": parseInt(document.getElementById("maxchars").value),
+        "alertinusd": checkedTrue,
+        "streamlabstoken": document.getElementById("streamlabstoken").value,
+        "password": document.getElementById("setpw").value,
+        "mindono": parseFloat(document.getElementById("mindono").value),
+        "donogoalhisthours": parseFloat(document.getElementById("donogoalhisthours").value),
+        "donogoal": parseFloat(document.getElementById("donogoal").value)
+    });
+    fetch("/api/settings", {
+        method: "POST",
+        body: formJson
+    }).then((result) => {
+        if (result.status != 200) {
+            throw new Error("Bad Server Response")
+        }
+        return result.json()
+    }).then((response) => {
+        var resp = JSON.parse(response);
+        document.getElementById('save').value = resp.message;
+    }).catch((error) => {
+        console.log(error)
+    });
+    return false
+}
+
+    </script>
+  </div>
+
+  <div id="Overlays" class="panel" style="display:none">
+          <h2>Overlays (WIP: more to come)</h2>
+    <a href=/overlay/goal>/overlay/goal</a>
+    <p>paste link into obs, interact with it to login, then refresh. OBS should hold onto the auth cookie</p>
+  </div>
+
+<script>
+function openCity(evt, tab) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("panel");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tab");
+  document.getElementById(tab).style.display = "block";
+}
+</script>
+</body>
+
+</html>

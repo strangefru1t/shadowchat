@@ -1,0 +1,14 @@
+[Unit]
+Description=Monero RPC Wallet Daemon
+Documentation=https://getmonero.org
+After=network.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/monero-wallet-rpc --config-file /srv/shadowchat/rpc.conf --non-interactive --password '' --disable-rpc-login --rpc-bind-port=18082
+StandardOutput=journal
+StandardError=journal
+WorkingDirectory=/srv/shadowchat
+
+[Install]
+WantedBy=multi-user.target

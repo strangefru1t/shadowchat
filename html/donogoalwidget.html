@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Donation Goal</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<style>
+body { 
+  background: none;
+  border: 1px solid #262b3b;
+  border-radius: 5px; 
+  zoom: 150%;
+}
+.prog {
+  width: calc(100% / {{.}});
+}
+</style>
+
+
+<body>
+<blockquote id="prog" class="prog">{{.}} XMR</blockquote>
+<script>
+function move() {
+  var elem = document.getElementById("prog");   
+  var width = 20;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
+      elem.innerHTML = width * 1  + '%';
+    }
+  }
+}
+</script>
+</body>
+
+</html>

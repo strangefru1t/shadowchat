@@ -1,0 +1,151 @@
+.waiting {
+    display: none;
+    position: relative;
+    width: 80px;
+    margin: 0 auto;
+    height: 80px;
+}
+
+.waiting div {
+    position: absolute;
+    border: 5px solid #70799b;
+    opacity: 1;
+    border-radius: 50%;
+    animation: waiting 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.waiting div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+
+@keyframes waiting {
+    0% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    4.9% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    5% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+    }
+}
+
+body {
+    background: #12151C;
+    color: ghostwhite;
+    font-family: Sans-Serif;
+    overflow: -moz-scrollbars-none;
+}
+
+body::-webkit-scrollbar {
+    width: 0 !important
+}
+
+small {
+    color: #70799b88;
+    display: block;
+    text-align: center
+}
+
+small a {
+    color: #70799b88
+}
+
+a {
+    color: #70799bff;
+    text-decoration: none;
+    outline: none
+}
+
+.form,.centered {
+    max-width: 360px;
+    margin: 0px auto;
+}
+
+::placeholder {
+    color: #70799b;
+}
+
+label {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+:focus {
+    border: 1px solid #70799bdd;
+}
+
+textarea {
+    resize: vertical;
+    overflow: hidden;
+    height: 64px;
+    max-height: 128px;
+}
+
+.copy {
+    user-select: all
+}
+.green { color: #6adda5 }
+.blue { color: #96b4f1 }
+.grey { color: #70799b }
+input,textarea,blockquote,img,button,form a {
+    display: block;
+    word-break: break-all;
+    outline: none;
+    box-sizing: border-box;
+    font-family: Sans-Serif;
+    background: #262b3b;
+    border: 1px solid #70799b60;
+    color: white;
+    min-height: 36px;
+    padding: 8px;
+    font-size: 16px;
+    width: calc(100% - 10px);
+    margin: 5px;
+    border-radius: 4px;
+}
+input[type='checkbox'] { 
+    display: inline;
+    width: 16px;
+    vertical-align: middle;
+}
+.card small, .card h3 {
+  display: inline;
+}
+.card p {
+   margin: 0px 0px 0px 0px;
+   padding: 8px;
+}
+button {
+  display: inline;
+  width: auto;
+}
+
+
+form a {
+    padding: 0px 4px 0px 4px;
+    display: inline;
+}
