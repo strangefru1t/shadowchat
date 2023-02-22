@@ -1,5 +1,19 @@
+## Monero based paid chat system for live streams
+This is alpha software
+
+#### Features
+ - Relays superchats to streamlabs
+ 
+#### Missing
+ - Native TTS alerts
+ - OBS widgets
+
 # Debian 11 Setup
 All commands were tested as root on a fresh debian instance
+
+### Demo/dono instance with auth disabled:
+ - https://beta.shdw.chat
+ - https://beta.shdw.chat/dashboard
 
 ### Install dependencies
 
