@@ -24,6 +24,7 @@ All commands were tested as root on a fresh debian instance
 ### Create user and database
 
 1. `useradd -m -d /srv/shadowchat -s /bin/bash shadowchat`
+#### Remember this password
 1. `su - postgres -c 'createuser -P shadowchat && createdb -l C -E UTF8 -T template0 -O shadowchat shadowchat_db'`
 
 ### Upload your view only wallet
@@ -72,3 +73,7 @@ Check that both statuses are green. You will see `Connection to rpc wallet faile
 #### After setting `server_name` and adding DNS record
 1. `certbot --nginx`
 1. Follow prompts
+
+#### Log into `https://your-site/dashboard`
+ - user: `admin`
+ - password: Password you set for the database user
