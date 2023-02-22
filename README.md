@@ -13,14 +13,16 @@ All commands were tested as root on a fresh debian instance
 1. `su - postgres -c 'createuser -P shadowchat && createdb -l C -E UTF8 -T template0 -O shadowchat shadowchat_db'`
 
 ### Upload your view only wallet
-Copy your viewonly and viewonly.keys files to the /opt/shadowchat/ directory.
+Copy your viewonly and viewonly.keys files to the /srv/shadowchat/ directory.
 1. `scp "C:\Users\user\Documents\Monero\wallets\user\walletname_viewonly*" root@server_ip:/srv/shadowchat`
 
-### Install and configure shadowchat
-1. `git clone https://github.com/strangefru1t/sc.git && cd sc`
+### Set up directory and configs
+1. `git clone https://github.com/strangefru1t/shadowchat.git && cd shadowchat`
 1. `cp service-files/*.service /etc/systemd/system && systemctl daemon-reload`
 1. `cp -r html/ rpc.conf config.json /srv/shadowchat/`
 1. `chown -R shadowchat:shadowchat /srv/shadowchat`
+
+### Build shadowchat
 1. `wget https://go.dev/dl/go1.20.1.linux-amd64.tar.gz`
 1. `tar xvf go1.20.1.linux-amd64.tar.gz`
 1. `GOBIN=/usr/bin ./go/bin/go install cmd/sc-api/shadowchat.go`
@@ -29,6 +31,9 @@ Copy your viewonly and viewonly.keys files to the /opt/shadowchat/ directory.
 #### Edit /srv/shadowchat/config.json
 
 1. `systemctl enable --now shadowchat xmr-rpc`
+1. `systemctl status shadowchat xmr-rpc`
+
+Check that both statuses are green. You will see "Connection to rpc wallet failed" until the monero wallet has fully synced.
 
 #### /etc/nginx/sites-enabled/default
     server {
