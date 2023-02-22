@@ -68,3 +68,7 @@ Check that both statuses are green. You will see `Connection to rpc wallet faile
             proxy_pass http://127.0.0.1:8000;
         }
     }
+    
+#### After setting `server_name` and adding DNS record
+1. `certbot --nginx`
+1. Follow prompts
